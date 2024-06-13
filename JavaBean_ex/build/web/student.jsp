@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.Student" %>
 <!DOCTYPE html>
@@ -72,6 +72,85 @@
         <%
             }
         %>
+        <!-- Add Back Button -->
+        <button onclick="goBack()">Back</button>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+
+        <form action="LogoutServlet" method="post">
+            <button type="submit" class="button">Logout</button>
+        </form>
+    </body>
+</html>--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.Student" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Student Dashboard</title>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+            th, td {
+                padding: 10px;
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+            th {
+                background-color: #999999;
+            }
+            .content {
+                text-align: center;
+            }
+            .button {
+                background-color: #ffcc99;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
+                border-radius: 5px;
+                width: 6%;
+                margin-top: 10px;
+            }
+            .button:hover {
+                background-color: #ff9933;
+            }
+        </style>
+    </head>
+    <body>
+        <h2 class="content">Student Dashboard</h2>
+        <c:if test="${empty students}">
+            <p>No students available</p>
+        </c:if>
+        <c:if test="${not empty students}">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Full name</th>
+                    <th>Class</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                </tr>
+                <c:forEach var="student" items="${students}">
+                    <tr>
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>${student.studentClass}</td>
+                        <td>${student.phone}</td>
+                        <td>${student.address}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:if>
         <!-- Add Back Button -->
         <button onclick="goBack()">Back</button>
         <script>

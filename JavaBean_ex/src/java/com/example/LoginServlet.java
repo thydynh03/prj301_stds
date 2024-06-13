@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Cookie;
 
 public class LoginServlet extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -21,6 +22,12 @@ public class LoginServlet extends HttpServlet {
             role = "admin";
         } else if ("dinhthi03".equals(username) && "030504".equals(password)) {
             role = "user";
+        }         
+        else {
+            // Chuyển thông báo lỗi về login.jsp
+            request.setAttribute("error", "Wrong password or User Name");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
         }
 
         if (role != null) {
@@ -41,6 +48,7 @@ public class LoginServlet extends HttpServlet {
             }
         } else {
             response.sendRedirect("login.jsp?error=Invalid username or password");
+
         }
     }
 }
